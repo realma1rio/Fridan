@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Fridan | Site de pedidos para lanchonetes por menos de R$ 10 por dia</title>
+<meta name="description" content="Site próprio com pedidos pelo WhatsApp, painel de vendas, clientes e caixa para lanchonetes. Teste 7 dias grátis. Depois, R$ 299,90 por mês, com suporte todos os dias.">
+<meta name="theme-color" content="#132A4A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpolygon points='2.5,35 43,17.4 37,30.4 61.25,30.7 21.75,48 27.7,35' fill='%236CB475'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<noscript><style>.ch{opacity:1!important;transform:none!important}</style></noscript>
+<style>
+/* ═══ IDENTIDADE FRIDAN — paleta e fonte vêm daqui ═══ */
+:root{--navy:#132A4A;--blue:#2E7D5B;--cyan:#6CB475;--graph:#334155;--light:#F8FAFC;--mint:#10B981;
+--card:#1A2F4F;--deep:#0C1B30;--line:rgba(148,163,184,.22);--mut:#94A3B8}
+*{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--navy);color:var(--light);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;
+background-image:linear-gradient(rgba(46,125,91,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(46,125,91,.07) 1px,transparent 1px);background-size:48px 48px;padding-bottom:env(safe-area-inset-bottom)}
+.w{max-width:1080px;margin:0 auto;padding:0 20px}
+a{color:inherit}
+.mu{color:var(--mut)}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+/* topo */
+.hd{position:sticky;top:0;z-index:20;background:rgba(19,42,74,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.hd .w{display:flex;align-items:center;justify-content:space-between;height:62px}
+.lgo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.06em;text-decoration:none}
+.lgo svg{width:34px;height:34px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:14px 24px;font:700 15px/1.1 Montserrat,system-ui,sans-serif;color:#fff;background:var(--blue);cursor:pointer;text-decoration:none;transition:background .15s}
+.btn:hover{background:#25664A}
+.btn:disabled{opacity:.55;cursor:default}
+.btn.sm{padding:10px 16px;font-size:14px}
+.gh{background:none;border:1px solid var(--line);border-radius:12px;color:var(--light);padding:13px 18px;font:600 14px Montserrat,sans-serif;cursor:pointer}
+/* movimento das letras: entram da esquerda para a direita */
+.wd{display:inline-block;white-space:nowrap}
+.ch{display:inline-block;opacity:0;transform:translateX(-.7em)}
+.in .ch{animation:ci .7s cubic-bezier(.2,.7,.2,1) both}
+@keyframes ci{to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.ch{opacity:1;transform:none;animation:none!important}.bars i{animation:none!important}}
+/* hero */
+.hero{display:grid;gap:44px;align-items:center;padding:clamp(40px,9vw,104px) 0 clamp(48px,8vw,88px)}
+@media(min-width:880px){.hero{grid-template-columns:1.2fr .8fr}}
+h1{font-size:clamp(36px,7.4vw,68px);line-height:1.06;font-weight:800;letter-spacing:-.025em}
+h1,h2,.big{font-family:Georgia,'Times New Roman',serif}
+h2{font-size:clamp(24px,4.4vw,36px);line-height:1.15;font-weight:800;letter-spacing:-.015em}
+.lead{font-size:clamp(16px,2.2vw,19px);color:#CBD5E1;max-width:54ch;margin:22px 0 30px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.mock{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;max-width:420px;width:100%;justify-self:center}
+.mock .dots{display:flex;gap:6px;margin-bottom:16px}.mock .dots i{width:9px;height:9px;border-radius:50%;background:var(--graph)}
+.mock small{color:var(--mut)}.mock>b{display:block;font-size:30px;font-weight:800;margin:2px 0 14px}
+.bars{display:flex;align-items:flex-end;gap:8px;height:120px;border-bottom:1px solid var(--line);padding-bottom:0}
+.bars i{flex:1;height:var(--h);background:var(--blue);border-radius:5px 5px 0 0;transform-origin:bottom;animation:gr .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--n)*110ms + 900ms)}
+.bars i:nth-child(5){background:var(--cyan)}
+@keyframes gr{from{transform:scaleY(0)}}
+.mrow{display:flex;justify-content:space-between;margin-top:14px;font-size:14px;color:var(--mut)}.mrow b{color:var(--light)}
+.ex{display:block;margin-top:12px;font-size:12px;color:var(--mut)}
+/* seções */
+.sec{padding:clamp(48px,8vw,88px) 0;border-top:1px solid var(--line)}
+.two{display:grid;gap:36px}
+@media(min-width:880px){.two{grid-template-columns:.9fr 1.1fr;gap:64px}}
+.it{padding:2px 0 2px 20px;border-left:3px solid var(--cyan);margin-bottom:26px}
+.it b{display:block;font-size:18px;margin-bottom:4px}.it p{color:#CBD5E1}
+.steps{display:grid;gap:0;margin-top:34px;counter-reset:s}
+@media(min-width:760px){.steps{grid-template-columns:repeat(4,1fr)}}
+.stp{counter-increment:s;padding:22px 20px 22px 0;border-top:3px solid var(--graph)}
+.stp:first-child{border-top-color:var(--cyan)}
+.stp::before{content:counter(s);display:block;font-size:34px;font-weight:800;color:var(--cyan);line-height:1;margin-bottom:10px}
+.stp b{display:block;margin-bottom:4px}.stp p{color:var(--mut);font-size:15px}
+.band{background:var(--blue);border-radius:24px;padding:clamp(28px,6vw,56px);display:grid;gap:20px;margin:0 0 56px}
+.band .btn{background:var(--light);color:var(--navy)}.band .btn:hover{background:#fff}
+.ft{padding:28px 0 44px;color:var(--mut);font-size:14px;border-top:1px solid var(--line)}
+.vg{display:grid;gap:30px 48px;margin-top:30px}@media(min-width:760px){.vg{grid-template-columns:1fr 1fr}}
+.vg h3{font-size:18px;color:var(--cyan);margin-bottom:8px}
+.chk{list-style:none;padding:0}.chk li{position:relative;padding:6px 0 6px 30px;color:#CBD5E1}
+.chk li::before{content:"";position:absolute;left:3px;top:11px;width:14px;height:7px;border-left:3px solid var(--mint);border-bottom:3px solid var(--mint);transform:rotate(-45deg)}
+.pc{display:grid;gap:18px;margin-top:30px}@media(min-width:860px){.pc{grid-template-columns:1.1fr .9fr}}
+.pbox{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,4vw,30px)}.pbox.hl{border-color:var(--cyan)}
+.pr{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.pr b{font-size:clamp(34px,7vw,50px);font-weight:800;line-height:1.1}
+.day{display:inline-block;margin-top:8px;background:rgba(16,185,129,.16);color:#6EE7B7;border-radius:999px;padding:7px 16px;font-weight:700;font-size:15px}
+.calc{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,4vw,30px);margin-top:18px;display:grid;gap:22px}@media(min-width:860px){.calc{grid-template-columns:1.1fr .9fr;align-items:center}}
+.co{background:var(--deep);border:1px solid var(--line);border-radius:16px;padding:20px}.co small{color:var(--mut)}.co b{display:block;font-size:clamp(30px,6vw,42px);font-weight:800;color:var(--mint);margin:2px 0 8px}.co p{color:#CBD5E1;font-size:15px}
+details{border-top:1px solid var(--line);padding:16px 0}details:last-child{border-bottom:1px solid var(--line)}summary{cursor:pointer;font-weight:700}details p{color:#CBD5E1;margin-top:8px}
+.band p{color:#DBEAFE}
+.sb{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(19,42,74,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:none}.sb .btn{width:100%}
+@media(max-width:879px){.sb{display:block}.ft{padding-bottom:96px}}
+.ls{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}.ls small{display:block}.co .ls b{font-size:clamp(17px,3.6vw,22px);color:var(--light);margin:0}
+.co .lo{color:#F87171}
+.lv{border-top:1px solid var(--line);padding-top:14px;margin-top:4px}.lv small{display:block;margin-bottom:4px}.lv b{display:inline;font-size:clamp(20px,4.4vw,28px);color:var(--mint);margin:0}
+.co #nt{margin-top:12px}
+/* formulário e acesso */
+.qz{max-width:660px;margin:0 auto;padding:34px 20px 90px}
+.bar{height:6px;border-radius:9px;background:var(--line);overflow:hidden;margin-bottom:30px}.bar i{display:block;height:100%;background:var(--cyan);transition:width .4s}
+.qz h2{margin:6px 0 10px}.qz .mu{margin-bottom:20px}
+label{display:block;font-weight:600;font-size:14px;margin:14px 0 6px}
+input,select,textarea{width:100%;background:var(--deep);border:1px solid var(--line);border-radius:12px;color:var(--light);padding:14px;font:500 16px Montserrat,system-ui,sans-serif}
+textarea{min-height:130px;resize:vertical}
+.ops{margin-top:8px}
+.op{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);color:var(--light);border-radius:14px;padding:16px;font:500 15px Montserrat,sans-serif;cursor:pointer;margin-bottom:10px;transition:border-color .15s,background .15s}
+.op:hover{border-color:var(--mut)}.op.on{border-color:var(--cyan);background:rgba(108,180,117,.13)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+.er{color:#FCA5A5;font-size:14px;min-height:20px;margin-top:8px}
+.big{font-size:clamp(54px,14vw,84px);font-weight:800;line-height:1;color:var(--cyan)}.big small{font-size:.3em;color:var(--mut);font-weight:600}
+.tabs{display:flex;gap:8px;margin:26px 0 16px;flex-wrap:wrap}
+.tb{background:none;border:1px solid var(--line);color:var(--light);border-radius:999px;padding:11px 18px;font:600 14px Montserrat,sans-serif;cursor:pointer}.tb.on{background:var(--blue);border-color:var(--blue)}
+.lk{display:flex;gap:8px;margin:10px 0}.lk input{flex:1;min-width:0}
+.cpb{flex:none;width:50px;border:1px solid var(--line);background:var(--card);color:var(--light);border-radius:12px;cursor:pointer;display:grid;place-items:center}.cpb svg{width:20px;height:20px}
+.nt{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.4);border-radius:14px;padding:14px 16px;color:#A7F3D0;margin:18px 0}
+.tt{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--light);color:var(--navy);padding:12px 20px;border-radius:999px;font-weight:700;font-size:14px;z-index:50}
+/* painel Fridan */
+.ad{padding:28px 20px 90px}
+.lg{max-width:380px;margin:40px auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.kpg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.kp{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}.kp small{color:var(--mut)}.kp b{display:block;font-size:28px;font-weight:800}
+.g2{display:grid;gap:14px;margin-bottom:18px}@media(min-width:860px){.g2{grid-template-columns:1fr 1fr}}
+.cd{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}.cd h3{font-size:17px;margin-bottom:10px}
+.lc{width:100%;height:auto;display:block}
+.hr{display:grid;grid-template-columns:minmax(80px,38%) 1fr 30px;gap:10px;align-items:center;margin:8px 0;font-size:14px}.hr div{height:10px;background:var(--line);border-radius:9px;overflow:hidden}.hr i{display:block;height:100%;background:var(--cyan)}.hr b{text-align:right}
+.fl{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 14px}.fl input{flex:1;min-width:160px}.fl select{width:auto}
+.rw{display:grid;grid-template-columns:1fr auto;gap:2px 12px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);color:var(--light);border-radius:14px;padding:14px 16px;margin-bottom:8px;cursor:pointer;font:inherit}
+.rw:hover{border-color:var(--cyan)}.rw small{color:var(--mut)}.rw .r2{text-align:right}
+.sc{font-style:normal;font-weight:800;color:var(--cyan)}
+.bd{font-style:normal;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:rgba(108,180,117,.15);color:#67E8F9}.bd.a{background:rgba(16,185,129,.18);color:#6EE7B7}.bd.p{background:rgba(148,163,184,.2);color:#CBD5E1}.bd.x{background:rgba(248,113,113,.18);color:#FCA5A5}
+.md{position:fixed;inset:0;z-index:40;background:rgba(2,6,23,.75);display:grid;place-items:end center;overflow:auto}
+@media(min-width:700px){.md{place-items:center}}
+.mb{background:var(--navy);border:1px solid var(--line);border-radius:22px 22px 0 0;width:100%;max-width:680px;max-height:94vh;overflow:auto;padding:22px 20px calc(24px + env(safe-area-inset-bottom))}
+@media(min-width:700px){.mb{border-radius:22px}}
+.an{padding:10px 0;border-bottom:1px solid var(--line)}.an small{display:block;color:var(--mut)}
+
+/* ═══ roadmap ═══ */
+.rm-wrap{background:var(--deep);border:1px solid var(--line);border-radius:24px;padding:clamp(22px,4vw,40px)}
+.rm-grid{display:grid;gap:22px;position:relative}
+.rm-grid::before{content:"";position:absolute;left:8%;right:8%;top:6px;height:1px;background:linear-gradient(90deg,transparent,rgba(108,180,117,.6),rgba(148,163,184,.25),transparent);display:none}
+@media(min-width:880px){.rm-grid{grid-template-columns:repeat(3,1fr);gap:26px}.rm-grid::before{display:block}}
+.rm-col{position:relative;padding-top:22px}
+.rm-col::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:0 0 0 4px var(--deep)}
+@media(max-width:879px){.rm-col{padding-top:0}.rm-col::before{display:none}}
+.rm-c{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;height:100%}
+.rm-c.g{border-top:3px solid var(--mint)}
+.rm-c.y{border-top:3px solid #F59E0B}
+.rm-c.b{background:transparent;border:1px solid #7DD3FC}
+.rm-c h3{font-size:17px;margin-bottom:14px;letter-spacing:.02em}
+.rm-c.g h3{color:var(--mint)}.rm-c.y h3{color:#F59E0B}.rm-c.b h3{color:#7DD3FC}
+.rm-c ul{list-style:none;padding:0;display:grid;gap:12px}
+.rm-c li{display:flex;gap:12px;align-items:flex-start;color:#CBD5E1;font-size:14.5px;line-height:1.5}
+.ic{flex:none;width:22px;height:22px;margin-top:1px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s ease;color:var(--mint)}
+.rm-c.y .ic{color:#F59E0B}.rm-c.b .ic{color:#7DD3FC}
+.rm-c:hover .ic{transform:scale(1.1)}
+.rm-c.ativo::after{content:"";position:absolute;inset:-1px;border-radius:21px;pointer-events:none;animation:rmglow 2.8s ease-in-out infinite}
+@keyframes rmglow{0%,100%{box-shadow:0 0 0 1px rgba(108,180,117,.35),0 0 12px rgba(108,180,117,.12)}50%{box-shadow:0 0 0 1px rgba(108,180,117,.9),0 0 26px rgba(108,180,117,.45)}}
+.rm-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--mut);margin-bottom:8px}
+@media(prefers-reduced-motion:reduce){.hidden-scroll,.show-scroll,.roadmap-card{transition:none!important;opacity:1!important;transform:none!important}.rm-c.ativo::after{animation:none}}
+
+/* ═══ revelação ao rolar ═══ */
+.hidden-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.show-scroll {
+    opacity: 1;
+    transform: translateY(0);
+}
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.roadmap-card {
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+.roadmap-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 222, 114, 0.15);
+}
+
+/* ═══ estética: índigo profundo, ondas âmbar e magenta ═══ */
+:root{--navy:#132A4A;--deep:#16154000;--card:#1B3556;--line:rgba(255,255,255,.14);--mut:#A9BCCF;--light:#FFFFFF;--mint:#6CB475;--cyan:#6CB475;--blue:#2F7A55;--graph:#2A4A6B}
+:root{--deep:#0E1F36}
+body{background:var(--navy);background-image:none;position:relative;overflow-x:hidden}
+h1,h2,.big{font-family:Montserrat,system-ui,sans-serif}
+h1{text-transform:uppercase;letter-spacing:.06em;font-size:clamp(30px,5.4vw,58px);line-height:1.08;color:#6CB475;font-weight:800}
+h2{text-transform:uppercase;letter-spacing:.04em;font-size:clamp(20px,3.4vw,30px);color:#FFFFFF}
+.lead{color:#D4E0EC}
+.mu{color:var(--mut)}
+.waves{position:absolute;right:-12%;top:40px;width:min(760px,62vw);height:auto;opacity:.75;pointer-events:none;z-index:0}
+.hero{position:relative;z-index:1}
+.hero > div > p.mu:first-child{color:#6CB475;letter-spacing:.12em;text-transform:uppercase;font-size:12px;font-weight:700}
+.hd{background:rgba(19,42,74,.92);border-bottom:1px solid rgba(255,255,255,.08)}
+.lgo{color:#FFFFFF;letter-spacing:.14em}
+.btn{background:#EEF6FF;color:#132A4A;border-radius:999px;text-transform:uppercase;letter-spacing:.1em;font-size:13px;padding:14px 28px;box-shadow:0 10px 30px rgba(108,180,117,.2)}
+.btn:hover{background:#FFFFFF;box-shadow:0 14px 36px rgba(108,180,117,.35)}
+.gh{border-radius:999px}
+.sec{border-top:1px solid rgba(255,255,255,.1)}
+.pbox,.calc,.co,.mock,.rm-c,.pbox.hl{background:var(--card)}
+.pbox.hl{border-color:#6CB475}
+.chk li::before{border-color:#6CB475}
+.it{border-left-color:#2F7A55}
+.stp:first-child{border-top-color:#6CB475}.stp::before{color:#6CB475}
+.stp{border-top-color:#2A4A6B}
+.band{background:linear-gradient(120deg,#2F7A55 0%,#4FA06A 45%,#6CB475 100%);color:#fff}
+.band p{color:#EAF6EE}
+.band .btn{background:#132A4A;color:#FFFFFF}.band .btn:hover{background:#1F4A38}
+.day{background:rgba(108,180,117,.18);color:#CDEBD3}
+.co b{color:#6CB475}
+.co .lo{color:#9ED8AB}
+.bars i{background:linear-gradient(180deg,#6CB475,#2F7A55)}
+.bars i:nth-child(5){background:#6CB475}
+.ft{color:var(--mut);border-top-color:rgba(255,255,255,.1)}
+.rm-wrap{background:var(--deep);border-color:rgba(255,255,255,.1)}
+.rm-c.g{border-top-color:#6CB475}.rm-c.g h3{color:#6CB475}
+.rm-c.y{border-top-color:#4FA06A}.rm-c.y h3{color:#9ED8AB}.rm-c.y .ic{color:#9ED8AB}
+.rm-c.b{border-color:#2F7A55}.rm-c.b h3{color:#B8E6C2}.rm-c.b .ic{color:#B8E6C2}
+.rm-c.g .ic{color:#6CB475}
+.roadmap-card:hover{box-shadow:0 20px 40px rgba(108,180,117,.2)}
+.rm-c.ativo::after{animation-name:rmglowA}
+@keyframes rmglowA{0%,100%{box-shadow:0 0 0 1px rgba(108,180,117,.35),0 0 12px rgba(108,180,117,.12)}50%{box-shadow:0 0 0 1px rgba(108,180,117,.9),0 0 26px rgba(108,180,117,.4)}}
+.rm-col::before{background:var(--c)}
+@media(max-width:879px){.waves{width:130vw;right:-55%;top:-10px;opacity:.35}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-menu" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+<symbol id="i-bars" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+<symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v7M14 20h3"/></symbol>
+<symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c2 3 5 5 5 9a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3 0-5 1-8z"/></symbol>
+<symbol id="i-bike" viewBox="0 0 24 24"><circle cx="6" cy="16" r="3"/><circle cx="18" cy="16" r="3"/><path d="M6 16l4-7h5l3 7M10 9l2-3h3"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol>
+</defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="gl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A7D7B0"/><stop offset="1" stop-color="#6CB475"/></linearGradient></defs>
+<symbol id="lg" viewBox="0 0 64 64"><polygon points="2.5,35 43,17.4 37,30.4 61.25,30.7 21.75,48 27.7,35" fill="url(#gl)"/></symbol></svg>
+<header class="hd"><div class="w"><a class="lgo" href="#/"><svg><use href="#lg"/></svg>FRIDAN</a><a class="btn sm" href="#/diagnostico">Testar 7 dias grátis</a></div></header>
+
+<main id="v-home">
+ <div class="w">
+  <svg class="waves" viewBox="0 0 800 560" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"><defs><linearGradient id="wg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6CB475"/><stop offset=".55" stop-color="#4FA06A"/><stop offset="1" stop-color="#2F7A55"/></linearGradient></defs><g fill="none" stroke="url(#wg)" stroke-width="1.6" stroke-linecap="round"><path d="M0 430 C260 310 520 60 800 30"/><path d="M0 435 C260 313 520 69 800 48"/><path d="M0 440 C260 316 520 78 800 66"/><path d="M0 445 C260 319 520 87 800 83"/><path d="M0 450 C260 322 520 96 800 100"/><path d="M0 455 C260 325 520 105 800 118"/><path d="M0 460 C260 328 520 114 800 134"/><path d="M0 465 C260 331 520 123 800 151"/><path d="M0 470 C260 334 520 132 800 167"/><path d="M0 475 C260 337 520 141 800 182"/><path d="M0 480 C260 340 520 150 800 197"/><path d="M0 485 C260 343 520 159 800 212"/><path d="M0 490 C260 346 520 168 800 226"/><path d="M0 495 C260 349 520 177 800 239"/><path d="M0 500 C260 352 520 186 800 252"/><path d="M0 505 C260 355 520 195 800 264"/><path d="M0 510 C260 358 520 204 800 276"/><path d="M0 515 C260 361 520 213 800 287"/><path d="M0 520 C260 364 520 222 800 297"/><path d="M0 525 C260 367 520 231 800 307"/><path d="M0 530 C260 370 520 240 800 317"/><path d="M0 535 C260 373 520 249 800 326"/><path d="M0 540 C260 376 520 258 800 335"/><path d="M0 545 C260 379 520 267 800 344"/><path d="M0 550 C260 382 520 276 800 352"/><path d="M0 555 C260 385 520 285 800 361"/></g></svg>
+  <section class="hero">
+   <div>
+    <p class="mu" style="margin-bottom:14px">Fridan. Estruturando sua presença digital.</p>
+    <h1 data-split>Seu site de pedidos próprio por menos de R$ 10 por dia</h1>
+    <p class="lead">O sistema completo de pedidos para a sua lanchonete: cardápio online, pedidos no WhatsApp, painel de vendas, clientes e caixa. Você vende direto, sem comissão por pedido.</p>
+    <div class="cta"><a class="btn" href="#/diagnostico">Testar 7 dias grátis</a><a class="mu" id="demo" target="_blank" rel="noopener" href="#">Ver um exemplo do site funcionando</a></div>
+    <p class="mu" style="margin-top:14px;font-size:14px">Sem cartão. Você responde perguntas rápidas e recebe o link do site e do painel.</p>
+   </div>
+   <div class="mock" aria-hidden="true">
+    <div class="dots"><i></i><i></i><i></i></div>
+    <small>Faturamento do mês</small><b>R$ 12.480</b>
+    <div class="bars"><i style="--h:34%;--n:0"></i><i style="--h:52%;--n:1"></i><i style="--h:41%;--n:2"></i><i style="--h:66%;--n:3"></i><i style="--h:84%;--n:4"></i><i style="--h:58%;--n:5"></i><i style="--h:72%;--n:6"></i></div>
+    <div class="mrow"><span>Ticket médio <b>R$ 62</b></span><span>Pedidos <b>201</b></span></div>
+    <span class="ex">Exemplo ilustrativo do painel.</span>
+   </div>
+  </section>
+  <section class="sec" id="valor">
+   <h2 data-split>Tudo o que você leva para a sua lanchonete</h2>
+   <div class="vg">
+    <div><h3>Venda mais</h3><ul class="chk"><li>Cardápio online com fotos, categorias, combos e adicionais</li><li>Pedido pelo WhatsApp já com itens, total e endereço</li><li>Cupons, promoção na loja toda e oferta relâmpago</li><li>Taxa de entrega por distância, pedido mínimo e retirada na loja</li></ul></div>
+    <div><h3>Organize a operação</h3><ul class="chk"><li>Fila de pedidos: novo, em preparo e concluído</li><li>Aviso de item em falta ao cliente pelo WhatsApp</li><li>Recibo e comanda da cozinha para imprimir</li><li>Pausar pedidos avisando os clientes</li><li>Horário de funcionamento que bloqueia pedido fora do horário</li><li>Pedido de balcão e controle de caixa, com sangria e suprimento</li></ul></div>
+    <div><h3>Entenda seu negócio</h3><ul class="chk"><li>Faturamento do mês, ticket médio e número de pedidos</li><li>Dias da semana que mais vendem e produtos mais pedidos</li><li>Histórico de clientes e quem está sem pedir há 3, 7, 15 ou 30 dias</li><li>Mensagem de remarketing pronta no WhatsApp</li></ul></div>
+    <div><h3>Seja encontrado</h3><ul class="chk"><li>Site rápido no celular, em modo claro e escuro</li><li>Preparado para o Google, com prévia de link e a sua logo no WhatsApp</li><li>Domínio próprio, como sualanchonete.com.br</li></ul></div>
+    <div><h3>Suporte e evolução</h3><ul class="chk"><li>Suporte todos os dias, das 07:00 às 00:00</li><li>Suporte ilimitado para o painel e para dúvidas do sistema</li><li>Até 3 alterações de funcionalidades por mês</li><li>Funcionalidades futuras incluídas, sem taxa de implementação</li></ul></div>
+   </div>
+  </section>
+  <section class="sec" id="plano">
+   <h2 data-split>Bônus: um plano para trazer seus clientes do iFood e da 99Food para o seu site</h2>
+   <p class="lead" style="margin-bottom:0">Ter o site não basta se o cliente continua pedindo só nas plataformas. Por isso você recebe um plano, passo a passo, para levar quem já compra de você para o seu canal próprio.</p>
+   <div class="steps">
+    <div class="stp"><b>Mapear</b><p>Descobrimos de onde vêm seus pedidos e quanto cada plataforma cobra.</p></div>
+    <div class="stp"><b>Convidar</b><p>QR code e link na embalagem, no cartão de entrega e nas redes, com um motivo para pedir direto, como um cupom exclusivo.</p></div>
+    <div class="stp"><b>Trazer de volta</b><p>Mensagem pronta no WhatsApp para quem já pediu, direto da aba Clientes do painel.</p></div>
+    <div class="stp"><b>Medir</b><p>Você acompanha no painel quantos pedidos passaram a vir direto.</p></div>
+   </div>
+   <p class="mu" style="margin-top:14px;font-size:14px">Tudo respeitando as regras de cada plataforma.</p>
+  </section>
+  <section class="sec" id="preco">
+   <h2 data-split>Quanto custa</h2>
+   <div class="pc">
+    <div class="pbox hl">
+     <p class="mu">Primeiro mês</p><div class="pr"><b>R$ 350,00</b></div><p class="mu">Inclui o registro do seu domínio próprio.</p>
+     <p class="mu" style="margin-top:18px">Depois</p><div class="pr"><b>R$ 299,90</b><span class="mu">por mês</span></div>
+     <span class="day">Menos de R$ 10 por dia</span>
+     <p class="mu" style="margin-top:10px;font-size:14px">R$ 299,90 ÷ 30 dias = R$ 9,99 por dia. No primeiro mês, R$ 350,00 ÷ 30 dias = cerca de R$ 11,67.</p>
+     <ul class="chk" style="margin:18px 0"><li>Sem comissão por pedido: o valor é fixo, venda pouco ou muito</li><li>Site, painel e hospedagem no mesmo valor</li><li>Suporte todos os dias, das 07:00 às 00:00, ilimitado para o painel e dúvidas do sistema</li><li>Até 3 alterações de funcionalidades por mês</li><li>Funcionalidades futuras incluídas, sem taxa de implementação</li><li>Bônus: plano para trazer seus clientes do iFood e da 99Food para o seu site</li><li>7 dias grátis para testar, sem cartão</li></ul>
+     <a class="btn" href="#/diagnostico">Testar 7 dias grátis</a>
+    </div>
+    <div class="pbox">
+     <h3 style="margin-bottom:8px">Para comparar</h3>
+     <p class="mu">Num pedido de R$ 60 pelo iFood, no plano básico (12% de comissão e 3,2% de pagamento online), a plataforma fica com cerca de R$ 9,12. Pouco mais de 1 pedido por dia que passe a vir direto para o seu site já cobre o valor mensal.</p>
+     <p class="mu" style="margin-top:10px;font-size:13px">Exemplo ilustrativo. Confira as taxas do seu contrato com cada plataforma.</p>
+    </div>
+   </div>
+  </section>
+  <section class="sec">
+   <h2 data-split>Como funciona</h2>
+   <div class="steps">
+    <div class="stp"><b>Diagnóstico</b><p>Você responde perguntas rápidas sobre como vende hoje.</p></div>
+    <div class="stp"><b>Acesso liberado</b><p>Recebe o link do site e o do painel para conferir na prática.</p></div>
+    <div class="stp"><b>7 dias grátis</b><p>Use com seus clientes, sem pagar nada nesse período.</p></div>
+    <div class="stp"><b>Você decide</b><p>Gostou, continua. Se não houver pagamento, o site e o painel são pausados.</p></div>
+   </div>
+  </section>
+  <section class="sec"><h2 data-split>Perguntas frequentes</h2><div style="margin-top:22px">
+   <details><summary>Preciso trocar o iFood pelo site?</summary><p>Não. O site complementa. Você mantém os marketplaces e leva os clientes recorrentes para um canal sem comissão.</p></details>
+   <details><summary>Como os pedidos chegam?</summary><p>Pelo WhatsApp da loja, já com itens, total e endereço. Eles também ficam registrados no painel.</p></details>
+   <details><summary>O que acontece depois dos 7 dias?</summary><p>Se você continuar, o primeiro mês é R$ 350,00 e depois R$ 299,90 por mês. Sem pagamento, o site e o painel são pausados.</p></details>
+   <details><summary>Por que o primeiro mês é R$ 350,00?</summary><p>Porque inclui o registro do seu domínio próprio, como sualanchonete.com.br.</p></details>
+   <details><summary>Como funciona o suporte?</summary><p>O atendimento funciona todos os dias, das 07:00 às 00:00, e é ilimitado para o painel e para dúvidas do sistema. Você também pode pedir até 3 alterações de funcionalidades por mês. As funcionalidades que a Fridan lançar no futuro entram no seu plano sem taxa de implementação.</p></details>
+  </div></section>
+  <section class="sec" id="perda">
+   <h2 data-split>Simule quanto você vai economizar e colocar no bolso com a Fridan</h2>
+   <p class="lead" style="margin-bottom:0">Cada venda que passa a vir direto para o seu site deixa de pagar comissão às plataformas. Veja quanto sobra para o seu caixa depois da assinatura.</p>
+   <div class="calc" id="calc">
+    <div>
+     <label for="cv">Faturamento bruto por mês em iFood, 99Food ou similares (R$)</label><input id="cv" type="number" inputmode="decimal" min="0" value="10000">
+     <label for="cc">Taxa média que você paga às plataformas (%)</label><input id="cc" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="15">
+     <p class="mu" style="font-size:13px;margin-top:6px">Exemplo: taxa média de 15%. Confira o seu contrato.</p>
+     <label for="cm">Parte das vendas que poderia vir direto para o seu site: <b id="cmv">30%</b></label><input id="cm" type="range" min="5" max="60" step="5" value="30" style="padding:0;accent-color:#6CB475">
+    </div>
+    <div class="co" id="co">
+     <small>Economia com comissões por mês</small><b id="n1">R$ 0</b>
+     <div class="lv"><small>Lucro líquido recuperado para o seu caixa, já descontada a assinatura de R$ 299,90</small><b id="n2">R$ 0</b></div>
+     <p id="nt"></p>
+    </div>
+   </div>
+   <p class="mu" id="qb" style="margin-top:12px;font-size:14px">Com cerca de 8 pedidos de R$ 60 por semana vindo direto para o seu site, a assinatura de R$ 299,90 já se paga.</p>
+  </section>
+
+  <section class="band"><h2 data-split>Teste 7 dias grátis e veja seus pedidos chegando</h2><p>Sem cartão. Responda perguntas rápidas e receba o link do site e do painel.</p><div><a class="btn" href="#/diagnostico">Testar 7 dias grátis</a></div></section>
+  <section class="sec" id="roadmap">
+   <div class="rm-wrap">
+    <h2 class="animate-on-scroll" style="margin-bottom:8px">Roteiro de Evolução Fridan (Roadmap)</h2>
+    <p class="mu" style="margin-bottom:6px">A Fridan evolui todo mês. Veja o que já está no seu plano e o que vem por aí.</p>
+    <div class="rm-grid animate-on-scroll" id="rmg">
+     <div class="rm-col animate-on-scroll delay-1" style="--c:var(--mint)">
+      <div class="rm-c roadmap-card g ativo">
+       <span class="rm-tag">STATUS</span>
+       <h3>🟢 DISPONÍVEL AGORA</h3>
+       <ul>
+        <li><svg class="ic"><use href="#i-menu"/></svg><span>Cardápio Digital Premium com o subdomínio da sua lanchonete (ex.: sua-loja.fridan.com.br)</span></li>
+        <li><svg class="ic"><use href="#i-bars"/></svg><span>Painel Administrativo PDV completo: caixa, sangria, suprimento e relatórios</span></li>
+        <li><svg class="ic"><use href="#i-pin"/></svg><span>Cálculo de frete por ruas reais (OSRM e Nominatim) integrado ao WhatsApp</span></li>
+        <li><svg class="ic"><use href="#i-qr"/></svg><span>Aba "Plano Independência": QR Code de Mesa e panfletos iFood Flip</span></li>
+       </ul>
+      </div>
+     </div>
+     <div class="rm-col animate-on-scroll delay-2" style="--c:#F59E0B">
+      <div class="rm-c roadmap-card y">
+       <span class="rm-tag">STATUS</span>
+       <h3>🟡 EM DESENVOLVIMENTO</h3>
+       <ul>
+        <li><svg class="ic"><use href="#i-flame"/></svg><span>Módulo KDS (Tela da Cozinha): gerenciador visual de produção para tablets e TVs na chapa</span></li>
+        <li><svg class="ic"><use href="#i-bike"/></svg><span>Módulo Delivery (Tela do Motoboy): roteirização com mapa e baixa de entregas em tempo real</span></li>
+       </ul>
+      </div>
+     </div>
+     <div class="rm-col animate-on-scroll delay-3" style="--c:#7DD3FC">
+      <div class="rm-c roadmap-card b">
+       <span class="rm-tag">STATUS</span>
+       <h3>🔵 PLANEJADO</h3>
+       <ul>
+        <li><svg class="ic"><use href="#i-chat"/></svg><span>Chatbot Inteligente com IA: atendimento automatizado por texto no WhatsApp, integrado ao estoque no Supabase</span></li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+ </div>
+ <footer class="ft"><div class="w">Fridan. Estruturando sua presença digital.</div></footer>
+</main>
+
+<section id="v-quiz" hidden><div class="qz" id="qz"></div></section>
+<section id="v-res" hidden><div class="qz" id="res"></div></section>
+<section id="v-adm" hidden><div id="adm"></div></section>
+<div class="sb" id="sb"><a class="btn" href="#/diagnostico">Testar 7 dias grátis</a></div>
+<div class="tt" id="tt" hidden>Link copiado</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+/* ═══ CONFIGURAÇÃO — preencha antes de publicar ═══
+   SB_URL / SB_KEY: Supabase > Project Settings > API (use a chave "anon public").
+   SITE: endereço do site que o cliente vai testar (o mesmo da loja de demonstração).
+   WA: seu WhatsApp com DDI e DDD, só números (ex.: 5521999999999). Opcional. */
+const CFG={SB_URL:'',SB_KEY:'',SITE:'https://casallanches22.netlify.app',WA:''};
+
+const PRICE={first:350,month:299.9};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let sb=null;try{if(CFG.SB_URL&&window.supabase)sb=supabase.createClient(CFG.SB_URL,CFG.SB_KEY)}catch(e){}
+
+/* ═══ PERGUNTAS — cada opção: [texto, pontos de oportunidade]. m:1 = marca várias.
+   As primeiras são de situação; as últimas ajudam o cliente a pesar o benefício. ═══ */
+const Q=[
+{k:'canais',t:'Por onde seus clientes fazem pedidos hoje?',h:'Marque todos que usa. Quanto mais canais, mais difícil é manter tudo organizado.',m:1,o:[['WhatsApp',0],['iFood',0],['99Food',0],['Telefone',0],['Instagram',0],['Só no balcão',0]]},
+{k:'sistema',t:'Você já usa algum sistema para receber pedidos ou controlar a loja?',h:'Saber o que você usa hoje mostra o que dá para aproveitar e o que está faltando.',o:[['Nenhum, controlo no caderno ou de cabeça',3],['Uso planilha',2],['Só o painel do iFood ou da 99Food',2],['Sistema de caixa (PDV) no balcão',1],['Cardápio online próprio com sistema de pedidos',0]]},
+{k:'vol',t:'Quantos pedidos você recebe por semana?',h:'Uma estimativa já serve.',o:[['Até 50',0],['De 50 a 150',1],['De 150 a 300',2],['Mais de 300',3]]},
+{k:'tempo',t:'Quanto tempo por dia sua equipe gasta respondendo cardápio, preço e horário?',h:'Perguntas repetidas tomam tempo que poderia ir para a cozinha e para vender.',o:[['Menos de 30 minutos',0],['De 30 minutos a 1 hora',1],['De 1 a 2 horas',2],['Mais de 2 horas',3]]},
+{k:'erros',t:'Com que frequência um pedido sai errado: item, soma ou endereço?',h:'Pedido digitado à mão tem mais chance de erro do que pedido montado pelo próprio cliente.',o:[['Quase nunca',0],['Algumas vezes por mês',1],['Toda semana',2],['Quase todo dia',3]]},
+{k:'dados',t:'Sem abrir planilha, você sabe quanto vendeu ontem e qual produto mais sai?',h:'Saber o que vende e quando ajuda a decidir cardápio, promoção e compras.',o:[['Sei os dois',0],['Sei mais ou menos',2],['Não sei',3]]},
+{k:'mkt',t:'Qual parte das suas vendas vem de iFood, 99Food ou similares?',h:'Marketplaces trazem clientes, mas cobram uma parte de cada venda.',o:[['Nenhuma',0],['Até 25%',1],['De 25% a 50%',2],['Mais de 50%',3]]},
+{k:'pago',t:'Quanto você paga por mês às plataformas, somando comissão, taxa de pagamento e mensalidade?',h:'Se não souber o valor, esse é o primeiro número a descobrir. Ele costuma surpreender.',o:[['Nada, não uso plataformas',0],['Até R$ 500',1],['De R$ 500 a R$ 1.500',2],['De R$ 1.500 a R$ 3.000',3],['Mais de R$ 3.000',3],['Não sei quanto pago',3]]},
+{k:'google',t:'Um cliente novo procura sua loja no Google e não encontra um site. O que ele provavelmente pensa?',h:'Muita gente confere o site antes de pedir de um lugar que não conhece.',o:[['Nada, pede mesmo assim',0],['Fica em dúvida se o lugar é confiável',2],['Prefere um concorrente que tenha site',3]]},
+{k:'economia',t:'Se 1 em cada 5 pedidos de marketplace passasse a vir direto para você, essa economia faria diferença?',h:'Cliente que já conhece sua loja pode pedir direto, sem comissão.',o:[['Pouca',0],['Alguma',1],['Bastante',2],['Muita, mudaria meu mês',3]]},
+{k:'teste',t:'Você testaria um site próprio por 7 dias, sem pagar, para ver o resultado na prática?',h:'Você recebe o link do site e do painel ao terminar. Sem cartão e sem compromisso.',o:[['Não agora',0],['Talvez',1],['Sim, quero testar',3]]}
+];
+
+/* ═══ letras entrando da esquerda para a direita ═══ */
+function split(el){let i=0;const w=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t)){f.appendChild(document.createTextNode(' '));return}const wd=document.createElement('span');wd.className='wd';wd.setAttribute('aria-hidden','true');[...t].forEach(ch=>{const s=document.createElement('span');s.className='ch';s.textContent=ch;s.style.animationDelay=Math.min(i++*36,1100)+'ms';wd.appendChild(s)});f.appendChild(wd)});c.replaceWith(f)}else w(c)})};el.setAttribute('aria-label',el.textContent);w(el)}
+function ani(el){split(el);requestAnimationFrame(()=>el.classList.add('in'))}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:0,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('[data-split]').forEach(el=>{split(el);io.observe(el)});
+
+/* ═══ diagnóstico ═══ */
+let st=-1,A={},ID={empresa:'',contato:''},busy=false;
+function quiz(){const el=$('qz'),n=Q.length,pct=Math.round((st+1)/(n+1)*100);
+ let h='<div class="bar"><i style="width:'+pct+'%"></i></div>';
+ if(st<0){h+='<h2 id="qt">Vamos começar pelo seu negócio</h2><p class="mu">Leva cerca de 2 minutos.</p><label for="emp">Nome da lanchonete</label><input id="emp" maxlength="80" autocomplete="organization" value="'+esc(ID.empresa)+'"><label for="ctt">WhatsApp (opcional)</label><input id="ctt" inputmode="tel" maxlength="30" autocomplete="tel" value="'+esc(ID.contato)+'"><p class="er" id="er"></p><div class="nav"><span></span><button class="btn" id="nx">Continuar</button></div>';
+ }else{const q=Q[st],v=A[q.k];
+  h+='<small class="mu">Pergunta '+(st+1)+' de '+n+'</small><h2 id="qt">'+esc(q.t)+'</h2><p class="mu">'+esc(q.h||'')+'</p><div class="ops">'+q.o.map((o,i)=>'<button class="op'+((q.m?(v||[]).includes(i):v===i)?' on':'')+'" data-i="'+i+'">'+esc(o[0])+'</button>').join('')+'</div><p class="er" id="er"></p><div class="nav"><button class="gh" id="bk">Voltar</button><button class="btn" id="nx">'+(st===n-1?'Ver meu acesso':'Continuar')+'</button></div>';}
+ el.innerHTML=h;ani($('qt'));
+ if(st>=0)el.querySelectorAll('.op').forEach(b=>b.onclick=()=>{const q=Q[st],i=+b.dataset.i;
+  if(q.m){const a=A[q.k]||[];A[q.k]=a.includes(i)?a.filter(x=>x!==i):[...a,i];quiz()}
+  else{A[q.k]=i;quiz();setTimeout(()=>{if(st===Q.length-1)return;next()},260)}});
+ if($('bk'))$('bk').onclick=()=>{st--;quiz()};
+ $('nx').onclick=next}
+function next(){if(busy)return;
+ if(st<0){const e=$('emp').value.trim();if(e.length<2){$('er').textContent='Escreva o nome da lanchonete.';return}ID.empresa=e;ID.contato=$('ctt').value.trim();st=0;quiz();return}
+ const q=Q[st],v=A[q.k];if(q.m?!(v&&v.length):v===undefined){$('er').textContent='Escolha uma opção para continuar.';return}
+ if(st<Q.length-1){st++;quiz();return}finish()}
+async function finish(){busy=true;$('nx').disabled=true;$('nx').textContent='Preparando seu acesso...';
+ const id=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'l'+Date.now();let pts=0,max=0;
+ Q.forEach(q=>{const v=A[q.k];if(q.m){max+=3;pts+=Math.min((v||[]).length,3)}else{max+=Math.max(...q.o.map(o=>o[1]));pts+=q.o[v][1]}});
+ const score=Math.round(pts/max*100),r={};Q.forEach(q=>{const v=A[q.k];r[q.k]=q.m?(v||[]).map(i=>q.o[i][0]):q.o[v][0]});
+ if(sb){try{const{error}=await sb.from('fridan_leads').insert({id,empresa:ID.empresa,contato:ID.contato||null,respostas:r,score});if(error)console.warn(error.message)}catch(e){console.warn(e)}}
+ sessionStorage.setItem('fr_lead',JSON.stringify({id,empresa:ID.empresa,score,fim:Date.now()+7*864e5}));
+ busy=false;A={};location.hash='#/acesso'}
+
+/* ═══ página de acesso: link do site e do painel ═══ */
+const ICO='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
+function toast(t){const e=$('tt');e.textContent=t;e.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>e.hidden=true,1800)}
+async function cp(t){try{await navigator.clipboard.writeText(t)}catch(e){const i=document.createElement('input');i.value=t;document.body.appendChild(i);i.select();document.execCommand('copy');i.remove()}toast('Link copiado')}
+function res(){const s=JSON.parse(sessionStorage.getItem('fr_lead')),site=CFG.SITE.replace(/\/$/,''),l1=site+'/?ref='+s.id,l2=site+'/#admin',fim=new Date(s.fim).toLocaleDateString('pt-BR');
+ const msg=s.score>=66?'Seu negócio tem muito a ganhar com um canal próprio.':s.score>=33?'Há oportunidades claras de organizar a operação e economizar.':'Você já está organizado. O site reforça a credibilidade e abre um canal sem comissão.';
+ $('res').innerHTML='<small class="mu">Diagnóstico concluído</small><h2 id="rt">Pronto, '+esc(s.empresa)+'. Seu site está liberado.</h2><p class="mu">Nível de oportunidade do seu negócio</p><div class="big">'+s.score+'<small>/100</small></div><p style="margin-top:8px">'+msg+'</p>'
+ +'<div class="nt">Acesso gratuito até '+fim+'. Depois dessa data, sem pagamento, o site e o painel são pausados.</div><p class="mu" style="margin:-6px 0 14px">Para continuar: primeiro mês R$ 350,00 (inclui o domínio próprio) e depois R$ 299,90 por mês, menos de R$ 10 por dia. Você também recebe o plano para trazer seus clientes do iFood e da 99Food para o site. O suporte funciona todos os dias, das 07:00 às 00:00.</p>'
+ +'<div class="tabs" role="tablist"><button class="tb on" id="t1" role="tab">Link do site</button><button class="tb" id="t2" role="tab">Painel administrativo</button></div>'
+ +'<div id="p1"><b>Envie este link aos seus clientes</b><div class="lk"><input readonly value="'+esc(l1)+'" aria-label="Link do site"><button class="cpb" id="c1" aria-label="Copiar link do site">'+ICO+'</button></div><a class="mu" href="'+esc(l1)+'" target="_blank" rel="noopener">Abrir o site</a></div>'
+ +'<div id="p2" hidden><b>Clique para acessar o painel administrativo</b><div class="lk"><input readonly value="'+esc(l2)+'" aria-label="Link do painel"><button class="cpb" id="c2" aria-label="Copiar link do painel">'+ICO+'</button></div><a class="mu" href="'+esc(l2)+'" target="_blank" rel="noopener">Abrir o painel</a><p class="mu" style="margin-top:14px">O login temporário do painel será enviado pela Fridan.</p></div>'
+ +(CFG.WA?'<p style="margin-top:26px"><a class="btn" target="_blank" rel="noopener" href="https://wa.me/'+esc(CFG.WA)+'?text='+encodeURIComponent('Olá! Sou da '+s.empresa+' e fiz o diagnóstico da Fridan.')+'">Falar com a Fridan no WhatsApp</a></p>':'');
+ ani($('rt'));const tab=k=>{$('p1').hidden=k!==1;$('p2').hidden=k!==2;$('t1').classList.toggle('on',k===1);$('t2').classList.toggle('on',k===2)};
+ $('t1').onclick=()=>tab(1);$('t2').onclick=()=>tab(2);$('c1').onclick=()=>cp(l1);$('c2').onclick=()=>cp(l2)}
+
+/* ═══ painel da Fridan (#/painel) ═══ */
+let L=[],QF='canais';
+const shell=h=>'<div class="w ad">'+h+'</div>';
+const out=async()=>{await sb.auth.signOut();adm()};
+async function adm(){const el=$('adm');
+ if(!sb){el.innerHTML=shell('<h2>Configure o Supabase</h2><p class="mu" style="margin-top:10px">Preencha SB_URL e SB_KEY no início do script e rode o arquivo fridan-setup.sql no Supabase.</p>');return}
+ const{data:{session}}=await sb.auth.getSession();if(!session){login();return}
+ const{data,error}=await sb.from('fridan_leads').select('*').order('criado_em',{ascending:false});
+ if(error){el.innerHTML=shell('<h2>Sem acesso aos dados</h2><p class="mu" style="margin:10px 0">'+esc(error.message)+'</p><button class="gh" id="lo">Sair</button>');$('lo').onclick=out;return}
+ L=data||[];paint()}
+function login(){$('adm').innerHTML=shell('<div class="lg"><h2>Painel Fridan</h2><label for="le">E-mail</label><input id="le" type="email" autocomplete="username"><label for="lp">Senha</label><input id="lp" type="password" autocomplete="current-password"><p class="er" id="lr"></p><button class="btn" id="ls" style="width:100%">Entrar</button></div>');
+ const go=async()=>{const{error}=await sb.auth.signInWithPassword({email:$('le').value.trim(),password:$('lp').value});if(error){$('lr').textContent='E-mail ou senha incorretos.';return}adm()};
+ $('ls').onclick=go;$('lp').onkeydown=e=>{if(e.key==='Enter')go()}}
+const dl=x=>Math.ceil((new Date(x.trial_fim)-Date.now())/864e5);
+function bd(x){if(x.status==='ativo')return'<i class="bd a">Ativo</i>';if(x.status==='pausado')return'<i class="bd p">Pausado</i>';const d=dl(x);return d>0?'<i class="bd">Teste: '+d+(d===1?' dia':' dias')+'</i>':'<i class="bd x">Teste expirado</i>'}
+function lc(pts){const W=320,H=130,pl=14,pr=14,pt=22,pb=24,n=pts.length,m=Math.max(1,...pts.map(p=>p[1])),X=i=>pl+i*(W-pl-pr)/(n-1),Y=v=>pt+(H-pt-pb)*(1-v/m),by=H-pb,P=pts.map((p,i)=>X(i).toFixed(1)+','+Y(p[1]).toFixed(1)).join(' ');
+ return'<svg class="lc" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Diagnósticos por dia"><line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+by+'" y2="'+by+'" stroke="#334155"/><polyline points="'+P+'" fill="none" stroke="#6CB475" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>'+pts.map((p,i)=>'<circle cx="'+X(i).toFixed(1)+'" cy="'+Y(p[1]).toFixed(1)+'" r="3" fill="#132A4A" stroke="#6CB475" stroke-width="2"/>'+(p[1]?'<text x="'+X(i).toFixed(1)+'" y="'+(Y(p[1])-8).toFixed(1)+'" text-anchor="middle" font-size="9" font-weight="700" fill="#F8FAFC">'+p[1]+'</text>':'')+(i%2===0?'<text x="'+X(i).toFixed(1)+'" y="'+(H-8)+'" text-anchor="middle" font-size="9" fill="#94A3B8">'+p[0]+'</text>':'')).join('')+'</svg>'}
+function paint(){const now=Date.now(),d=864e5,n=L.length,
+ w7=L.filter(x=>now-new Date(x.criado_em)<7*d).length,avg=n?Math.round(L.reduce((t,x)=>t+x.score,0)/n):0,
+ sim=n?Math.round(L.filter(x=>x.respostas&&x.respostas.teste==='Sim, quero testar').length/n*100):0,
+ tr=L.filter(x=>x.status==='trial'&&dl(x)>0).length,ex=L.filter(x=>x.status==='trial'&&dl(x)>0&&dl(x)<=2).length,at=L.filter(x=>x.status==='ativo').length;
+ const days=[...Array(14)].map((_,i)=>{const t=new Date(now-(13-i)*d),k=t.toDateString();return[t.getDate(),L.filter(x=>new Date(x.criado_em).toDateString()===k).length]});
+ const tl={};L.forEach(x=>{const v=x.respostas&&x.respostas[QF];(Array.isArray(v)?v:[v]).forEach(a=>{if(a)tl[a]=(tl[a]||0)+1})});
+ const mx=Math.max(1,...Object.values(tl)),q=Q.find(z=>z.k===QF);
+ $('adm').innerHTML=shell('<div class="top"><h2>Painel Fridan</h2><div class="cta"><button class="gh" id="ex">Exportar CSV</button><button class="gh" id="lo">Sair</button></div></div>'
+ +'<div class="kpg"><div class="kp"><small>Diagnósticos</small><b>'+n+'</b></div><div class="kp"><small>Últimos 7 dias</small><b>'+w7+'</b></div><div class="kp"><small>Oportunidade média</small><b>'+avg+'</b></div><div class="kp"><small>Querem testar</small><b>'+sim+'%</b></div><div class="kp"><small>Em teste</small><b>'+tr+'</b></div><div class="kp"><small>Teste acaba em até 2 dias</small><b>'+ex+'</b></div><div class="kp"><small>Clientes ativos</small><b>'+at+'</b></div></div>'
+ +'<div class="g2"><div class="cd"><h3>Diagnósticos por dia (14 dias)</h3>'+lc(days)+'</div><div class="cd"><h3>Respostas por pergunta</h3><select id="qs" aria-label="Pergunta">'+Q.map(z=>'<option value="'+z.k+'"'+(z.k===QF?' selected':'')+'>'+esc(z.t)+'</option>').join('')+'</select><div style="margin-top:10px">'+(Object.keys(tl).length?q.o.map(o=>'<div class="hr"><span>'+esc(o[0])+'</span><div><i style="width:'+Math.round((tl[o[0]]||0)/mx*100)+'%"></i></div><b>'+(tl[o[0]]||0)+'</b></div>').join(''):'<p class="mu">Sem respostas ainda.</p>')+'</div></div></div>'
+ +'<h3 style="margin-bottom:8px">Lanchonetes</h3><div class="fl"><input id="qf" placeholder="Buscar por nome ou contato" aria-label="Buscar"><select id="sf" aria-label="Filtrar por status"><option value="">Todos</option><option value="trial">Em teste</option><option value="ativo">Ativos</option><option value="pausado">Pausados</option></select></div><div id="ll"></div>');
+ $('lo').onclick=out;$('ex').onclick=csv;$('qs').onchange=e=>{QF=e.target.value;paint()};$('qf').oninput=lst;$('sf').onchange=lst;lst()}
+function lst(){const t=$('qf').value.trim().toLowerCase(),s=$('sf').value,f=L.filter(x=>(!s||x.status===s)&&(!t||(x.empresa+' '+(x.contato||'')).toLowerCase().includes(t)));
+ $('ll').innerHTML=f.length?f.map(x=>'<button class="rw" data-id="'+x.id+'"><b>'+esc(x.empresa)+'</b><span class="r2"><em class="sc">'+x.score+'</em></span><small>'+esc(x.contato||'sem contato')+' · '+new Date(x.criado_em).toLocaleDateString('pt-BR')+'</small><span class="r2">'+bd(x)+'</span></button>').join(''):'<p class="mu">Nenhuma lanchonete encontrada.</p>';
+ $('ll').querySelectorAll('.rw').forEach(b=>b.onclick=()=>det(b.dataset.id))}
+function det(id){const x=L.find(l=>l.id===id),r=x.respostas||{},m=document.createElement('div');m.className='md';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');
+ const tf=x.trial_fim?new Date(x.trial_fim).toISOString().slice(0,10):'';
+ m.innerHTML='<div class="mb"><div class="top"><div><h2 style="font-size:24px">'+esc(x.empresa)+'</h2><span class="mu">'+esc(x.contato||'sem contato')+' · oportunidade <b class="sc">'+x.score+'</b>/100</span></div><button class="gh" id="mx">Fechar</button></div>'
+ +(x.contato?'<p style="margin-bottom:10px"><a class="mu" target="_blank" rel="noopener" href="https://wa.me/55'+String(x.contato).replace(/\D/g,'').replace(/^55/,'')+'">Chamar no WhatsApp</a></p>':'')
+ +Q.map(q=>'<div class="an"><small>'+esc(q.t)+'</small><b>'+esc(Array.isArray(r[q.k])?r[q.k].join(', '):(r[q.k]||'Sem resposta'))+'</b></div>').join('')
+ +'<label for="ms">Situação do acesso</label><select id="ms"><option value="trial">Em teste</option><option value="ativo">Ativo (pago)</option><option value="pausado">Pausado</option></select><label for="md">Teste vai até</label><input id="md" type="date" value="'+tf+'"><label for="mr">Relatório sobre esta lanchonete</label><textarea id="mr" placeholder="Anote o que descobriu, objeções e próximos passos.">'+esc(x.relatorio||'')+'</textarea><p class="er" id="me"></p><div class="nav"><span class="mu">'+(x.relatorio_em?'Salvo em '+new Date(x.relatorio_em).toLocaleString('pt-BR'):'')+'</span><button class="btn" id="mv">Salvar</button></div></div>';
+ document.body.appendChild(m);$('ms').value=x.status;const fim=()=>m.remove();$('mx').onclick=fim;m.addEventListener('click',e=>{if(e.target===m)fim()});
+ $('mv').onclick=async()=>{$('mv').disabled=true;const d=$('md').value,u={status:$('ms').value,relatorio:$('mr').value.trim()||null,relatorio_em:new Date().toISOString()};if(d)u.trial_fim=new Date(d+'T23:59:59').toISOString();
+  const{error}=await sb.from('fridan_leads').update(u).eq('id',id);if(error){$('me').textContent='Não foi possível salvar: '+error.message;$('mv').disabled=false;return}
+  Object.assign(x,u);fim();paint();toast('Salvo')}}
+function csv(){const H=['empresa','contato','score','status','criado_em','trial_fim',...Q.map(q=>q.k),'relatorio'],f=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"',
+ rows=L.map(x=>[x.empresa,x.contato,x.score,x.status,x.criado_em,x.trial_fim,...Q.map(q=>{const v=x.respostas&&x.respostas[q.k];return Array.isArray(v)?v.join('; '):v}),x.relatorio].map(f).join(',')),
+ b=new Blob(['\ufeff'+[H.join(','),...rows].join('\n')],{type:'text/csv'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='fridan-lanchonetes.csv';a.click()}
+
+/* ═══ calculadora de economia: carrega ao abrir a página ═══ */
+(function(){const fm=n=>'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}),v=$('cv'),c=$('cc'),m=$('cm');$('demo').href=CFG.SITE;
+ function calc(){const V=Math.max(0,+v.value||0),C=Math.min(100,Math.max(0,+c.value||0)),M=+m.value||0,ec=V*(M/100)*(C/100),lu=ec-PRICE.month;
+  $('cmv').textContent=M+'%';$('n1').textContent=fm(ec);$('n2').textContent=(lu<0?'-':'')+fm(Math.abs(lu));
+  $('nt').textContent=lu>=0?'Sua assinatura já se paga e ainda sobra para o seu caixa.':'Ainda não cobre a assinatura. Aumente a parte que vem direto para o seu site ou o faturamento que você quer comparar.';}
+ [v,c,m].forEach(x=>x.addEventListener('input',calc));calc();})();
+
+/* ═══ rotas ═══ */
+function route(){const h=location.hash;['home','quiz','res','adm'].forEach(v=>$('v-'+v).hidden=true);
+ let v='home';if(h==='#/diagnostico')v='quiz';else if(h==='#/acesso')v='res';else if(h==='#/painel')v='adm';
+ if(v==='res'&&!sessionStorage.getItem('fr_lead')){location.hash='#/';return}
+ $('v-'+v).hidden=false;document.querySelector('.hd .btn').hidden=(v==='adm');$('sb').hidden=(v!=='home');window.scrollTo(0,0);
+ if(v==='quiz'){st=-1;A={};quiz()}if(v==='res')res();if(v==='adm')adm()}
+addEventListener('hashchange',route);route();
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show-scroll");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 }); // Dispara quando 10% do elemento aparece
+
+    // Seleciona todos os elementos que devem se mexer ao rolar a página
+    const animatedElements = document.querySelectorAll(".animate-on-scroll");
+    animatedElements.forEach((el) => {
+        el.classList.add("hidden-scroll");
+        observer.observe(el);
+    });
+});
+</script>
+</body>
+</html>
